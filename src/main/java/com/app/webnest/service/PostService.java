@@ -31,6 +31,12 @@ public interface PostService {
    // 게시글 추가
     public Map<String, Long> write(PostVO postVO);
 
+
+
+
+
+
+
 }
 
 

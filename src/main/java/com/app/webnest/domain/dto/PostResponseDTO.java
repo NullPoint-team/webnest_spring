@@ -18,6 +18,9 @@ public class PostResponseDTO {
     private Long userId;
     private String postType;
     private String userNickname;
+
+    //
+    private Integer postLikeCount;
 }
 
 

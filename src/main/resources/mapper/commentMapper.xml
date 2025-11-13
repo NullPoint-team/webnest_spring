@@ -32,4 +32,12 @@
         DELETE FROM TBL_COMMENT
         WHERE ID = #{id}
     </delete>
+
+<!--    채택   -->
+    <update id="acceptComment">
+        UPDATE TBL_COMMENT
+        SET COMMENT_IS_ACCEPT = 1
+        WHERE ID = #{commentId}
+    </update>
+
 </mapper>

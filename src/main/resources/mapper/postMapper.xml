@@ -115,4 +115,15 @@
         SET POST_VIEW_COUNT = POST_VIEW_COUNT + 1
         WHERE ID = #{id}
     </update>
+
+
+<!--    좋아요-->
+    <select id="selectPostLikeCount" parameterType="long" resultType="int">
+        SELECT COUNT(*)
+        FROM TBL_POST_LIKE
+        WHERE POST_ID = #{postId}
+    </select>
+
+
+
 </mapper>

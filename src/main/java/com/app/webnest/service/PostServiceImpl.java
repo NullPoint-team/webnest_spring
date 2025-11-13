@@ -24,16 +24,39 @@ public class PostServiceImpl implements PostService {
 
     private final PostDAO postDAO;
 
+//    @Override
+//    public PostResponseDTO getPost(Long id) {
+//        postDAO.updateReadCount(id);
+//        return postDAO.findPost(id).orElseThrow(()-> new PostException("Post Not Found"));
+//    }
     @Override
     public PostResponseDTO getPost(Long id) {
         postDAO.updateReadCount(id);
-        return postDAO.findPost(id).orElseThrow(()-> new PostException("Post Not Found"));
+        PostResponseDTO post = postDAO.findPost(id)
+                .orElseThrow(() -> new PostException("Post Not Found"));
+
+        int likeCount = postDAO.getPostLikeCount(id);
+        post.setPostLikeCount(likeCount);
+
+        return post;
     }
 
+
     //조회수 증가안함
+//    @Override
+//    public PostResponseDTO getPostWithoutView(Long id) {
+//        return postDAO.findPost(id).orElseThrow(() -> new PostException("Post Not Found"));
+//    }
+
     @Override
     public PostResponseDTO getPostWithoutView(Long id) {
-        return postDAO.findPost(id).orElseThrow(() -> new PostException("Post Not Found"));
+        PostResponseDTO post = postDAO.findPost(id)
+                .orElseThrow(() -> new PostException("Post Not Found"));
+
+        int likeCount = postDAO.getPostLikeCount(id);
+        post.setPostLikeCount(likeCount);
+
+        return post;
     }
 
 
@@ -73,4 +96,6 @@ public class PostServiceImpl implements PostService {
         response.put("newPostId", newPostId);
         return response;
     }
+
+
 }

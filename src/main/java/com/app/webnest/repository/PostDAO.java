@@ -52,6 +52,11 @@ public class PostDAO {
         postMapper.updatePostViewCount(id);
     }
 
+    //좋아요
+    public int getPostLikeCount(Long postId) {
+        return postMapper.selectPostLikeCount(postId);
+    }
+
 
 
 
