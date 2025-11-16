@@ -31,7 +31,6 @@
         AND SUBCOMMENT_ID = #{subcommentId} AND ID = #{id}
     </delete>
 
-
-
+  
 
 </mapper>
