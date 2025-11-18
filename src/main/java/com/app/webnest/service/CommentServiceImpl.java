@@ -24,6 +24,9 @@ public class CommentServiceImpl implements CommentService {
         return commentDAO.findCommentPostId(postId);
     }
 
+
+
+
     //답글 작성
     @Override
     public Map<String, Long> writeComment(CommentVO commentVO) {
