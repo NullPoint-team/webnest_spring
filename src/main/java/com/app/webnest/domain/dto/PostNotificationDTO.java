@@ -12,7 +12,7 @@ import java.util.Date;
 public class PostNotificationDTO {
     private Long id;
     private String postNotificationAction;
-    private Integer postNotificationIsRead;
+    private boolean notificationIsRead;
     private Date notificationCreateAt;
     private String userThumbnailUrl;
     private int userLevel;
