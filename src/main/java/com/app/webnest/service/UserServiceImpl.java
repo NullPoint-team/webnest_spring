@@ -29,7 +29,8 @@ public class UserServiceImpl implements UserService {
   private final PostDAO postDAO;
   private final QuizDAO quizDAO;
   private final FollowDAO followDAO;
-    private final PostLikeDAO postLikeDAO;
+  private final PostLikeDAO postLikeDAO;
+  private final TypingRecordDAO  typingRecordDAO;
 
     // 이메일 중복 조회
   @Override
@@ -130,8 +131,9 @@ public class UserServiceImpl implements UserService {
   // 회원 정보 수정
   @Override
   public UserResponseDTO modify(UserVO userVO) {
-    if(userVO.getUserPassword() != null && !userVO.getUserPassword().isBlank())
-//      userVO.setUserPassword(passwordEncoder.encode(userVO.getUserPassword()));
+    if(userVO.getUserPassword() != null && !userVO.getUserPassword().isBlank()) {
+      userVO.setUserPassword(passwordEncoder.encode(userVO.getUserPassword()));
+    }
     userDAO.update(userVO);
     // 수정 후 업데이트된 사용자 정보 반환
     return getUserById(userVO.getId());
@@ -185,21 +187,14 @@ public class UserServiceImpl implements UserService {
         List<PostLikeDTO> openLikePosts = postLikeDAO.findLikedOpenPostsByUserId(id);
         // 좋아요 누른 - 문제 둥지
         List<PostLikeDTO> questionLikePosts = postLikeDAO.findLikedQuestionPostsByUserId(id);
-
         // 문제
-//        quizDAO
        List<QuizMyPageDTO> quizMyPage = quizDAO.selectByIdQuizIsSolveMyData(id);
-
        // 등급에서 문제별 진도 상황
         List<QuizMyPageDTO> quizMyPageLanguage = quizDAO.selectByIdQuizIsSolveForLanguageMyData(id);
-
         // 팔로워
         List<FollowDTO> followers = followDAO.findFollowersByUserId(id);
-
         // 팔로잉
         List<FollowDTO> following = followDAO.findFollowingByUserId(id);
-
-        // 타이핑
         myDatas.put("openPosts", openPosts);
         myDatas.put("questionPosts", questionPosts);
         myDatas.put("openLikePosts", openLikePosts);
@@ -208,7 +203,6 @@ public class UserServiceImpl implements UserService {
         myDatas.put("following", following);
         myDatas.put("quizMyPage", quizMyPage);
         myDatas.put("quizMyPageLanguage", quizMyPageLanguage);
-
         return myDatas;
     }
 

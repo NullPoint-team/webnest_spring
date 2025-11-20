@@ -19,7 +19,8 @@ public class CommentDTO {
     private String userThumbnailName;
     private Integer userLevel;
 
-
+    private String userThumbnailName;
+    private String userThumbnailUrl;
 
     private boolean liked;
     private int likeCount;
